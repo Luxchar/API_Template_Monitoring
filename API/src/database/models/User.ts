@@ -5,7 +5,12 @@ export interface IUser { // This is the interface for the user in the database
     token: string;
     username: string;
     password: string;
-
+    avatar?: string;
+    friends_requests_sent?: number[];
+    friends_requests_received?: number[];
+    friends?: number[];
+    
+    last_connection?: string;
     updated_at?: string;
     created_at?: string;
 }
@@ -17,7 +22,9 @@ const UserSchema = new Schema({
     token: { type: String, required: true, unique: true, index: true },
     username: { type: String, required: true, unique: false, index: true },
     password: { type: String, required: true },
+    avatar: { type: String, required: false, default: null },
 
+    last_connection: { type: String, required: true, default: new Date().toLocaleString() },
     updated_at: { type: String, required: true, default: new Date().toLocaleString() },
     created_at: { type: String, required: true, default: new Date().toLocaleString() },
 });
