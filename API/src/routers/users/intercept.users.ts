@@ -2,7 +2,6 @@ import { update } from "./update"
 import { userLogin, userRegister, userConnect } from "./connect"
 import { get } from "./get"
 import { friends } from "./friends"
-import { blocked } from "./blocked"
 
 
 export const UserIntercept = {
@@ -35,10 +34,5 @@ export const UserIntercept = {
     friends: {
         add: friends.add,
         remove: friends.remove
-    },
-
-    blocked: {
-        add: blocked.add,
-        remove: blocked.remove
     }
 }

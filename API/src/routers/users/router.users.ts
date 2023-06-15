@@ -215,27 +215,5 @@ export const UserRouter = {
             params: ["token", "friend_id"],
             res: UserIntercept.friends.remove
         }
-    },
-
-    Blocked: {
-        path: "/blocked",
-        Add: {
-            name: "addblocked",
-            method: "GET",
-            socketing: false,
-            description: "Add a blocked",
-            path: "/add/:blocked_id",
-            params: ["token", "blocked_id"],
-            res: UserIntercept.blocked.add
-        },
-        Remove: {
-            name: "removeblocked",
-            method: "GET",
-            socketing: false,
-            description: "Remove a blocked",
-            path: "/remove/:blocked_id",
-            params: ["token", "blocked_id"],
-            res: UserIntercept.blocked.remove
-        },
     }
 }
