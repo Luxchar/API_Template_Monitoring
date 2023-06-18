@@ -34,7 +34,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="/examples/actions/confirmation.php" method="post">
+                <form method="post">
                     <div class="form-group">
                         <input type="text" class="form-control" name="username" placeholder="Username"
                             required="required">
@@ -44,10 +44,10 @@
                             required="required">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+                        <button name="login" type="submit"
+                            class="btn btn-primary btn-lg btn-block login-btn">Login</button>
                     </div>
                 </form>
-
             </div>
             <div class="modal-footer">
                 <p><a href="#register" data-toggle="modal">Create new account</a></p>
@@ -69,7 +69,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/examples/actions/confirmation.php" method="post">
+                    <form method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" name="username" placeholder="Username"
                                 required="required">
@@ -91,7 +91,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Register</button>
+                            <button name="register" type="submit"
+                                class="btn btn-primary btn-lg btn-block login-btn">Register</button>
                         </div>
                     </form>
                 </div>
@@ -107,7 +108,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/examples/actions/confirmation.php" method="post">
+                    <form method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" name="username" placeholder="Username"
                                 required="required">
@@ -119,7 +120,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">send</button>
+                            <button name="reset" type="submit"
+                                class="btn btn-primary btn-lg btn-block login-btn">send</button>
                         </div>
                     </form>
                 </div>

@@ -1,5 +1,9 @@
 <?php
+//delete warning messages
+error_reporting(E_ERROR | E_PARSE);
+
 //request
+
 include_once('./src/request-post.php');
 //include_once('./src/check-cookie.php');
 

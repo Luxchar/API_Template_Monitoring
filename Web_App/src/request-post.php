@@ -1,18 +1,19 @@
 <?php
-// if (isset($_POST['register'])) { // if register form was submitted
-//     include_once('./src/auth/register.php');
-//     register();
-// }
+if (isset($_POST['login'])) { // if register form was submitted
+    // include_once('./src/login/index.php');
+    // login();
+    //Send validation or error html
+}
 
-// if (isset($_POST['login'])) { // if login form was submitted
-//     include_once('./src/auth/login.php');
-//     login();
-// }
+if (isset($_POST['register'])) { // if login form was submitted
+    // include_once('./src/auth/login.php');
+    // login();
+}
 
-// if (isset($_POST['reset-password'])) { // if login form was submitted
-//     include_once('./src/auth/reset-password.php');
-//     reset_password();
-// }
+if (isset($_POST['reset'])) { // if login form was submitted
+    // include_once('./src/auth/reset-password.php');
+    // reset_password();
+}
 
 // if (isset($_POST['manage-profile'])) { // if login form was submitted
 //     include_once('./src/user/manage-profile.php');
