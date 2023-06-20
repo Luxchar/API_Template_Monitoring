@@ -21,6 +21,7 @@ export const remove = async (req: express.Request, res: express.Response) => { /
         // Check if the message is not his own message
         var Message = await DB.messages.find.id(message_id)
         if(!Message) throw "Message not found"
+
         
         // Delete the message
         var Message = await DB.messages.find.id(message_id)
