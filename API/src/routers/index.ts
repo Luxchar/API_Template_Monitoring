@@ -2,4 +2,6 @@
 
 export * from "./controller"
 export * from "./users"
+export * from "./channels"
+export * from "./messages"
 export * from "./errors"

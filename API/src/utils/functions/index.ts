@@ -1,22 +1,16 @@
-import {findUserbyToken, findUserbyID} from "./find"
+import {findUserbyToken, findUserbyID, findFriendbyUser, findChannelID} from "./find"
 
-export class FUNCTIONS {
+export class FUNCTIONS {    
     static FIND = {
+        CHANNEL: {
+            id: findChannelID
+        },
+
         USER: {
             token: findUserbyToken,
-            id: findUserbyID
+            id: findUserbyID,
+            friend: findFriendbyUser
         }
-    }
-    
-    static REMOVE_OVERFLOW_INFO_SERVER = (server: any) => {
-        server.owner = undefined
-        server.members = undefined
-        server.channels = undefined
-        server.invites = undefined
-        server.bans = undefined
-        server.roles = undefined
-        server.permissions = undefined
-        return server
     }
 
     static REMOVE_PRIVATE_INFO_USER = (user: any) => {

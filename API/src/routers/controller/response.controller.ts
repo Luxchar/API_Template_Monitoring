@@ -1,6 +1,8 @@
 import { ErrorRouter } from "../errors/"
 import { UserRouter } from "../users"
 import { ScoreRouter } from "../score"
+import { ChannelsRouter } from "../channels"
+import { MessagesRouter } from "../messages"
 
 export const Intercept = { // Intercept the requests and responses and route them to the right function, this is the main router and all the other routers are children of this router
     ROOT: {
@@ -10,6 +12,8 @@ export const Intercept = { // Intercept the requests and responses and route the
 
             Users: UserRouter, // USER ROUTES
             Score: ScoreRouter, // SCORE ROUTES
+            Channels: ChannelsRouter, // CHANNEL ROUTES
+            Messages: MessagesRouter // MESSAGE ROUTES
     
         },
         

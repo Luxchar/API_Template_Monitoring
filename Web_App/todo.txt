@@ -1,25 +1,17 @@
-Le site web est con?u pour visualiser et g?rer les donn?es d'un jeu mais aussi permettre ? l'utilisateur de discuter entre eux et lire des articles d'actualit? sur le jeu. Il sera d?velopp? en utilisant les langages PHP (natif ou framework) pour la partie backend et possibilit? de framework JS pour le frontend. Les principales fonctionnalit?s du site web inclue :
-    API Modulaire: phase setup avec choix des modules à installer (ex: chat, friends, admin panel, page docs, etc.)
-    
-    - User module: manage users, manage user profile, manage user settings, user recover password.. (default module)
-    - Documentation module: list the routes, the parameters, the return values
-    - Admin panel module: manage users, manage modules, manage routes, manage permissions
-    - Friends module: manage friends, manage friend requests
-    - Chat module: chat between users (private and public) (needs friends module)
-    - Forum module: create articles, comment articles, like articles, share articles (needs users module)
-    - History module: history of the user's actions (needs users module)
-    - Stats module: stats of the user's actions (needs users module)
+DONE:
+- Une liste d'amis entre joueurs.
+- La mise en place d'un systeme de connexion et d'inscription
 
+TODO:
+- La gestion des statistiques et des scores des joueurs.
+- Un historique des parties jouees.
+- Une partie administrateur permettant de valider les articles post?s et g?rer les utilisateurs
 
-    - La possibilite de visualiser les donnees
-    - La gestion des statistiques et des scores des joueurs.
-    - Un historique des parties jouees.
-    - Une liste d'amis entre joueurs.
-    - L'int?gration de tests unitaires avec S?l?nium pour garantir la qualit? du code.
-    - Des filtres de recherche permettant de trouver des utilisateurs ou bien des articles post?s
-    - Une partie administrateur permettant de valider les articles post?s et g?rer les utilisateurs
-    - La mise en place d'un systeme de connexion et d'inscription
+- L'int?gration de tests unitaires avec S?l?nium pour garantir la qualit? du code.
+- Des filtres de recherche permettant de trouver des utilisateurs ou bien des articles post?s
+- La possibilite de visualiser les donnees
 
-    - La mise en place d'un chat inter-joueur pour faciliter les interactions (Message privés).
-    - La mise en place d'un chat général visible ? tous les membres 
-    - Un forum permettant aux utilisateurs de creer des articles sur le jeu
+?:
+- La mise en place d'un chat inter-joueur pour faciliter les interactions (Message privés).
+- La mise en place d'un chat général visible ? tous les membres 
+- Un forum permettant aux utilisateurs de creer des articles sur le jeu
