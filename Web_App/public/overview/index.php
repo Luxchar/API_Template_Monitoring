@@ -53,7 +53,7 @@
                 <div class="title-group mb-3">
                     <h1 class="h2 mb-0">Overview</h1>
 
-                    <small class="text-muted">Hello Thomas, welcome back!</small>
+                    <small class="text-muted">Hello <?= $username ?>, welcome back!</small>
                 </div>
 
                 <div class="row my-4">
@@ -90,7 +90,7 @@
                     <div class="col-lg-5 col-12">
                         <div class="custom-block custom-block-profile-front custom-block-profile text-center bg-white">
                             <div class="custom-block-profile-image-wrap mb-4">
-                                <img src="assets/images/medium-shot-happy-man-smiling.jpg"
+                                <img src="assets/images/profile/user.png"
                                     class="custom-block-profile-image img-fluid" alt="">
                             </div>
 
@@ -116,33 +116,6 @@
                                 </a>
                             </p>
                         </div>
-
-
-                        <div class="custom-block primary-bg">
-                            <h5 class="text-white mb-4">Friends</h5>
-
-                            <a href="#">
-                                <img src="assets/images/profile/young-woman-with-round-glasses-yellow-sweater.jpg"
-                                    class="profile-image img-fluid" alt="">
-                            </a>
-
-                            <a href="#">
-                                <img src="assets/images/profile/young-beautiful-woman-pink-warm-sweater.jpg"
-                                    class="profile-image img-fluid" alt="">
-                            </a>
-
-                            <a href="#">
-                                <img src="assets/images/profile/senior-man-white-sweater-eyeglasses.jpg"
-                                    class="profile-image img-fluid" alt="">
-                            </a>
-
-                            <div class="profile-rounded">
-                                <a href="#">
-                                    <i class="profile-rounded-icon bi-plus"></i>
-                                </a>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <?php
