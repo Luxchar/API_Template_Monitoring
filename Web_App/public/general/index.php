@@ -60,58 +60,11 @@ include_once('./public/_navbar.php');
                     <div class="col-lg-12 col-12">
                         <div class="custom-block bg-white">
                             <div class="table-responsive chat" style="max-height: 500px;">
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
-                                <p>[time] - user : bla bla bla</p>
-                                <p>[time] - user : bla bla et bla</p>
-                                <p>[time] - user : mais surtout bla</p>
-                                <p>[time] - user : return tg</p>
+                                <p>Chargement...</p>   
                             </div>
                             <br>
-                            <form class="custom-form header-form " action="#" method="get" role="form">
-                                <input class="form-control" name="message" type="text"
+                            <form class="custom-form header-form " role="form">
+                                <input class="form-control" name="message" id="message-send" type="text"
                                     placeholder="Seak with your friends" aria-label="message">
                             </form>
 
@@ -124,5 +77,86 @@ include_once('./public/_navbar.php');
             </main>
 
         </div>
+
+        <script>
+    var url = "http://localhost:3000"
+
+    async function getMessages() {
+        try {
+            const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+            const response = await fetch(url + "/api/channel/get/messages/1687380021722/99", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+                const chat = document.querySelector(".chat");
+                chat.innerHTML = "";
+                data.data.forEach(message => {
+                    chat.innerHTML += `<p>[${message.message.created_at}] - ${message.author.username} : ${message.message.message}</p>`;
+                });
+            } else {
+                console.error('HTTP error', response.status);
+            }
+
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
+
+    async function sendMessage() {
+        try {
+            const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            var messageU = document.querySelector("#message-send").value;
+            if(messageU == "") return;
+            const message = {
+                message: messageU
+            }
+
+            console.log(message, token)
+
+            const response = await fetch(url + "/api/message/send/1687380021722", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(message)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+            } else {
+                console.error('HTTP error', response.status);
+            }
+            
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
+
+    document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+        })
+    })
+
+    setInterval(getMessages, 1000)
+
+    document.querySelector("#message-send").addEventListener("keyup", (e) => {
+        if (e.key === "Enter") {
+            sendMessage();
+            document.querySelector("#message-send").value = "";
+        }
+    })
+</script>
+
     </div>
 </body>

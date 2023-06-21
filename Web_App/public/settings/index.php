@@ -59,11 +59,6 @@
                     <div class="col-lg-7 col-12">
                         <div class="custom-block bg-white">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="profile-tab" data-bs-toggle="tab"
-                                        data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                        aria-controls="profile-tab-pane" aria-selected="true">Profile</button>
-                                </li>
 
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="password-tab" data-bs-toggle="tab"
@@ -73,50 +68,16 @@
 
                             </ul>
 
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel"
-                                    aria-labelledby="profile-tab" tabindex="0">
-                                    <h6 class="mb-4">User Profile</h6>
-
-                                    <form class="custom-form profile-form" action="#" method="post" role="form">
-                                        <input class="form-control" type="text" name="profile-name" id="profile-name"
-                                            placeholder="John Doe">
-
-                                        <input class="form-control" type="email" name="profile-email" id="profile-email"
-                                            placeholder="Johndoe@gmail.com">
-
-                                        <div class="input-group mb-1">
-                                            <img src="images/profile/senior-man-white-sweater-eyeglasses.jpg"
-                                                class="profile-image img-fluid" alt="">
-
-                                            <input type="file" class="form-control" id="inputGroupFile02">
-                                        </div>
-
-                                        <div class="d-flex">
-                                            <button type="button" class="form-control me-3">
-                                                Reset
-                                            </button>
-
-                                            <button type="submit" class="form-control ms-2">
-                                                Update
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div class="tab-pane fade" id="password-tab-pane" role="tabpanel"
+                                <div class="tab-pane fade show active" id="password-tab-pane" role="tabpanel"
                                     aria-labelledby="password-tab" tabindex="0">
                                     <h6 class="mb-4">Password</h6>
 
                                     <form class="custom-form password-form" action="#" method="post" role="form">
-                                        <input type="password" name="password" id="password" pattern="[0-9a-zA-Z]{4,10}"
-                                            class="form-control" placeholder="Current Password" required="">
-
                                         <input type="password" name="confirm_password" id="confirm_password"
                                             pattern="[0-9a-zA-Z]{4,10}" class="form-control" placeholder="New Password"
                                             required="">
 
-                                        <input type="password" name="confirm_password" id="confirm_password"
+                                        <input type="password" name="confirm_password" id="repeat_confirm_password"
                                             pattern="[0-9a-zA-Z]{4,10}" class="form-control"
                                             placeholder="Confirm Password" required="">
 
@@ -125,7 +86,7 @@
                                                 Reset
                                             </button>
 
-                                            <button type="submit" class="form-control ms-2">
+                                            <button type="submit" class="form-control ms-2" onclick="updatePassword()">
                                                 Update Password
                                             </button>
                                         </div>
@@ -161,3 +122,116 @@
         </div>
     </div>
 </body>
+
+<script>
+    var url = 'http://localhost:3000';
+    async function updatePassword() {
+        try {
+            // pass bearer token too in the fetch
+            const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            var new_password = document.getElementById('confirm_password').value;
+            var repeat_new_password = document.getElementById('repeat_confirm_password').value;
+            
+            if(new_password.length < 6 || new_password.length > 50){
+                displayNotification('Password must be between 4 and 10 characters', 'error', 3000);
+                return;
+            }
+
+            if(new_password != repeat_new_password){
+                displayNotification('Passwords do not match', 'error', 3000);
+                return;
+            }
+            
+            const response = await fetch(url + '/api/client/update/password/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({
+                    newpassword: new_password,
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.status == 'success') {
+                displayNotification('Password updated', 'success', 3000);
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 3000);
+            } else {
+                displayNotification('Something went wrong', 'error', 3000);
+            }
+        } catch(err) {
+            displayNotification('Something went wrong', 'error', 3000);
+            console.log(err);
+        }
+    }
+</script>
+
+<script>
+        document.querySelectorAll("form").forEach(form => {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+        })
+    })
+    function displayNotification(message, status, duration) {
+    const notification = document.createElement('div');
+  
+    // Set class and text
+    notification.className = `notification ${status}`;
+    notification.textContent = message;
+  
+    // Add the notification to the body
+    document.body.appendChild(notification);
+  
+    // CSS for the notification
+    const css = `
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 20px;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.5s ease;
+            font-size: 16px;
+        }
+  
+        .notification.success {
+            background-color: green;
+        }
+  
+        .notification.error {
+            background-color: red;
+        }
+  
+        @media (max-width: 600px) {
+            .notification {
+                bottom: 10px;
+                right: 10px;
+                font-size: 14px;
+            }
+        }
+    `;
+  
+    // Create style element
+    const style = document.createElement('style');
+    style.textContent = css;
+  
+    // Add the style element to the head
+    document.head.appendChild(style);
+  
+    // Remove the notification after `duration` milliseconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+            document.head.removeChild(style);
+        }, 500);  // Matches the transition duration in the CSS
+    }, duration);
+  }
+</script>

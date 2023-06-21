@@ -1,3 +1,0 @@
--> Login / Register (script io)
--> Forum -> posts -> item->comment 
--> Page principal -> affichage scores / profil users

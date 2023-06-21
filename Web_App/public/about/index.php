@@ -62,8 +62,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-2">
                                         <h6>What is that fucking game ?</h6>
-                                        <strong class="d-block mb-2">Just a shit, you can download this garbage here =>
-                                            <a href="#garbage">xxx</a></strong>
+                                        <strong class="d-block mb-2">This game is an Original Tower Tactics that you can download <a href="#garbage">here</a></strong>
                                     </div>
 
 
@@ -76,7 +75,7 @@
 
                             <strong class="d-block mb-2">Can't reset my password</strong>
 
-                            <p>Bc je suis con</p>
+                            <p>Just go to your settings and select the category password, when done, just put your old password and your new one !</p>
 
                         </div>
                     </div>
@@ -88,7 +87,7 @@
                             <p>
                                 <strong>Call us:</strong>
                                 <a href="tel: 305-240-9671" class="ms-2">
-                                    06 00 00 00 00
+                                    06 45 69 87 45
                                 </a>
                             </p>
 
