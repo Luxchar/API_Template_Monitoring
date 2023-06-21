@@ -70,7 +70,7 @@
                             ?>
                             <div class="d-flex align-items-center border-bottom pb-3 mb-3">
                                 <div class="d-flex align-items-center">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/5453/5453658.png"
+                                    <img src="assets/images/profile/user.png"
                                         class="exchange-image img-fluid" alt="">
                                    
 

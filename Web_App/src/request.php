@@ -56,6 +56,13 @@ if ($uri == 'about') {
         header('Location: /');
         exit();
     }
+    $response = checkTokenValidity();
+    if($response['status'] != 'success'){
+        header('Location: /');
+        exit();
+    }
+    $username = $response['data']['username'];
+    $user_id = $response['data']['user_id'];
     include_once('./public/about/index.php');
     $error = false;
 }
@@ -70,6 +77,13 @@ if ($uri == 'settings') {
         header('Location: /');
         exit();
     }
+    $response = checkTokenValidity();
+    if($response['status'] != 'success'){
+        header('Location: /');
+        exit();
+    }
+    $username = $response['data']['username'];
+    $user_id = $response['data']['user_id'];
     include_once('./public/settings/index.php');
     $error = false;
 }
@@ -84,6 +98,13 @@ if ($uri == 'general') {
         header('Location: /');
         exit();
     }
+    $response = checkTokenValidity();
+    if($response['status'] != 'success'){
+        header('Location: /');
+        exit();
+    }
+    $username = $response['data']['username'];
+    $user_id = $response['data']['user_id'];
     include_once('./public/general/index.php');
     $error = false;
 }
@@ -102,6 +123,7 @@ if ($uri == 'overview') {
         exit();
     }
     $username = $response['data']['username'];
+    $user_id = $response['data']['user_id'];
     $scores = getAllScores();
     $scores = $scores['data'];
     $scoren = 0;
