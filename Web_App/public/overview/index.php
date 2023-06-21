@@ -19,13 +19,6 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/forum">
-                                <i class="bi-wallet me-2"></i>
-                                Forum
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link" href="/general">
                                 <i class="bi-wallet me-2"></i>
                                 General chat
@@ -68,38 +61,29 @@
                         <div class="custom-block custom-block-balance">
                             <small>Your last score</small>
 
-                            <h2 class="mt-2 mb-3">10 rounds</h2>
+                            <h2 class="mt-2 mb-3"><?= $scorelist[count($scorelist)-1] ? $scorelist[count($scorelist)-1] : "None" ;  ?></h2>
                         </div>
-
-                        <!-- <div class="custom-block bg-white">
-                                <h5 class="mb-4">History</h5>
-
-                                <div id="pie-chart"></div>
-                            </div> -->
                         <div class="custom-block custom-block-exchange">
                             <h5 class="mb-4">Game history</h5>
-
+                            <?php
+                                for ($i = 0; $i < count($scorelist); $i++) {
+                            ?>
                             <div class="d-flex align-items-center border-bottom pb-3 mb-3">
                                 <div class="d-flex align-items-center">
                                     <img src="https://cdn-icons-png.flaticon.com/512/5453/5453658.png"
                                         class="exchange-image img-fluid" alt="">
+                                   
 
                                     <div>
-                                        <p>time / date</p>
-                                        <h6>Score : 5 rounds</h6>
+                                        <h6>Score : <?= $scorelist[$i]; ?></h6>
                                     </div>
+
+                                    
                                 </div>
-
-                                <!-- <div class="ms-auto me-4">
-                                        <small>Sell</small>
-                                        <h6>1.0931</h6>
-                                    </div>
-
-                                    <div>
-                                        <small>Buy</small>
-                                        <h6>1.0821</h6>
-                                    </div> -->
                             </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                     </div>
 
@@ -113,7 +97,7 @@
                             <p class="d-flex flex-wrap mb-2">
                                 <strong>Username:</strong>
 
-                                <span>ThomasLeChaud</span>
+                                <span><?= $username ?></span>
                             </p>
 
                             <!-- <p class="d-flex flex-wrap mb-2">
@@ -128,7 +112,7 @@
                                 <strong>Best score:</strong>
 
                                 <a href="#">
-                                    50
+                                    <?= $scoren ?> rounds
                                 </a>
                             </p>
                         </div>

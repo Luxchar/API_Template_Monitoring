@@ -18,12 +18,6 @@ include_once('./public/_navbar.php');
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/forum">
-                                <i class="bi-wallet me-2"></i>
-                                Forum
-                            </a>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link active" href="/general">

@@ -10,8 +10,8 @@ export interface IScore { // This is the interface for the user in the database
 export interface IScoreModel extends IScore, Document {}
 
 const ScoreSchema = new Schema({
-    user_id: { type: Number, required: true, unique: true, index: true },
-    score: { type: Number, required: true, unique: true, index: true },
+    user_id: { type: Number, required: true, unique: false, index: true },
+    score: { type: Number, required: true, unique: false, index: true },
     username: { type: String, required: true, unique: false, index: true }
 });
 

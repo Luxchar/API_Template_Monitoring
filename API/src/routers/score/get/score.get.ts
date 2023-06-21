@@ -6,7 +6,7 @@ import Score from "../../../database/models/Score"
 
 export const getScore = async (req: express.Request, res: express.Response) => { // Get a user
     try {
-        const score = await Score.find() 
+        const score = await Score.find({}) 
 
         res.json(
             new RouteResponse()

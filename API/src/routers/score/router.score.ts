@@ -4,12 +4,14 @@ export const ScoreRouter = {
     path: "/score",
 
     Get: {
+        method: "GET",
         path: "/get",
         res: ScoreIntercept.get
     },
 
     Create: {
-        path: "/create",
+        method: "GET",
+        path: "/create/:user_id/:score",
         res: ScoreIntercept.create
     }
 }
