@@ -104,7 +104,7 @@
                             <p>
                                 <strong>Call us:</strong>
                                 <a href="tel: 305-240-9671" class="ms-2">
-                                    06 00 00 00 00
+                                    06 45 69 87 45
                                 </a>
                             </p>
                             <a mailto="test@gmail.com" class="btn custom-btn custom-btn-bg-white mt-3">
