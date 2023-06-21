@@ -61,7 +61,7 @@
                             <form class="custom-form search-form" action="#" method="post" role="form">
                                 <div class="row">
                                     <div class="col-lg-12 mb-2">
-                                        <h6>What is that fucking game ?</h6>
+                                        <h6>What is this game ?</h6>
                                         <strong class="d-block mb-2">This game is an Original Tower Tactics that you can download <a href="#garbage">here</a></strong>
                                     </div>
 
