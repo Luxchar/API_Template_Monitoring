@@ -3,7 +3,7 @@ import { RouteResponse, Status } from "../controller"
 import Logger from "../../client/logger.client"
 import DB from "../../database"
 import Emitter from "../../client/emitter.client"
-import { IMessageModel } from "../../database/models/Message"
+import Message, { IMessageModel } from "../../database/models/Message"
 import { v4, v5 } from "uuid"
 import UTILS from "../../utils"
 
@@ -12,9 +12,8 @@ export const send = async (req: express.Request, res: express.Response) => { // 
         const {message} = req.body
         const {channel_id} = req.params
         const token = req.token
-
-        if (!channel_id || !token || !message || channel_id.length < UTILS.CONSTANTS.CHANNEL.ID.MIN_LENGTH || channel_id.length > UTILS.CONSTANTS.CHANNEL.ID.MAX_LENGTH ||
-            token.length > UTILS.CONSTANTS.USER.TOKEN.MAX_LENGTH || token.length < UTILS.CONSTANTS.USER.TOKEN.MIN_LENGTH || isNaN(parseInt(channel_id))) throw "Badly formatted"
+        console.log(message, channel_id, token)
+        if (!channel_id || !token || !message) throw "Badly formatted"
 
         // Check if the user is banned
 
@@ -36,7 +35,8 @@ export const send = async (req: express.Request, res: express.Response) => { // 
         
         //if (!UTILS.FUNCTIONS.CHECK.CHANNEL.PERMISSIONS(User, Channel, UTILS.CONSTANTS.CHANNEL.PERMISSIONS.MESSAGE.SEND)) throw "You do not have permission to send messages in this channel"
 
-        var Message = await DB.messages.create({ // Create the message
+        var MessageSend = await Message.create({ // Create the message
+            username: User.username,
             message_id: Date.now() + Math.floor(Math.random() * 1000),
             channel_id: parseInt(channel_id),
             user_id: User.user_id,
@@ -44,16 +44,16 @@ export const send = async (req: express.Request, res: express.Response) => { // 
             created_at: new Date().toLocaleString()
         })
 
-        if(!Message) throw "Message not created"
+        if(!MessageSend) throw "Message not created"
         
-        await Message.save() // Save the message to the database
+        await MessageSend.save() // Save the message to the database
 
         Emitter.emit("sendMessage", Message) // Emit the message to the client
         res.json(
             new RouteResponse()
                 .setStatus(Status.success)
                 .setMessage(`Message sent`)
-                .setData(Message)
+                .setData(MessageSend)
         )
     }
 

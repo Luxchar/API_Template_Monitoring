@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addFriend = void 0;
-const database_1 = __importDefault(require("../../../database"));
 const controller_1 = require("../../controller");
 const emitter_client_1 = __importDefault(require("../../../client/emitter.client"));
 const utils_1 = __importDefault(require("../../../utils"));
@@ -41,10 +40,6 @@ const addFriend = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Check if the user is itself
         if (User.user_id.toString() === friend_id)
             throw "User is itself";
-        if (Friend.blocked) { // Check if user is already blocked by the friend in the database
-            if (Friend.blocked.includes(User.id.toString()))
-                throw "User is blocked";
-        }
         if (Friend.friends_requests_received) { // Check if user is already requested by the friend
             if (Friend.friends_requests_received.includes(User.id.toString()))
                 throw "User already requested";
@@ -69,40 +64,8 @@ const addFriend = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             else {
                 User.friends = [Friend.user_id];
             }
-            // check if channel already exists between users 
-            var Channel_Exists = yield utils_1.default.FUNCTIONS.FIND.CHANNEL.friend(User, Friend);
-            if (Channel_Exists)
-                throw "Channel already exists";
-            // create channel
-            var Channel = yield database_1.default.channels.create({
-                channel_id: Date.now() + Math.floor(Math.random() * 1000),
-                channel_type: utils_1.default.CONSTANTS.CHANNEL.TYPE.HYBRID,
-                channel_name: User.username + " and " + Friend.username,
-                updated_at: new Date().toLocaleString(),
-                created_at: new Date().toLocaleString(),
-                members: [User.user_id, Friend.user_id],
-                channel_category: "DM",
-                members_count: 2,
-                permissions: utils_1.default.CONSTANTS.PERMISSIONS.PRIVATE(User, Friend)
-            });
-            if (!Channel)
-                throw "Channel not created";
-            // Save the user
-            if (User.channels) {
-                User.channels.push(Channel.channel_id);
-            }
-            else {
-                User.channels = [Channel.channel_id];
-            }
             User.updated_at = new Date().toLocaleString();
             User.save();
-            // Save the user
-            if (Friend.channels) {
-                Friend.channels.push(Channel.channel_id);
-            }
-            else {
-                Friend.channels = [Channel.channel_id];
-            }
             Friend.updated_at = new Date().toLocaleString();
             Friend.save();
             // Emit the event

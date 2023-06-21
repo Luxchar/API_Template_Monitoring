@@ -30,8 +30,6 @@ const getMessages = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         var Channel = yield database_1.default.channels.find.id(parseInt(channel_id));
         if (!Channel)
             throw "Channel not found";
-        if (!Channel.members.includes(User.user_id))
-            throw "You are not a member of this channel";
         var Messages = yield database_1.default.channels.find.messages(channel_id, parseInt(limit));
         if (!Messages)
             throw "Messages not found";

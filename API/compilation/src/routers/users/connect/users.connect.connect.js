@@ -44,10 +44,6 @@ const userConnect = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         for (let i = 0; i < User.friends_requests_received.length; i++) {
             User.friends_requests_received[i] = utils_1.default.FUNCTIONS.REMOVE_PRIVATE_INFO_USER(User.friends_requests_received[i]);
         }
-        User.channels = yield database_1.default.channels.find.many(User.channels);
-        for (let i = 0; i < User.channels.length; i++) {
-            User.channels[i] = User.channels[i];
-        }
         emitter_client_1.default.emit("connect", User, null);
         res.json(new controller_1.RouteResponse()
             .setStatus(controller_1.Status.success)

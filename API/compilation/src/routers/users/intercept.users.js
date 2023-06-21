@@ -4,7 +4,7 @@ exports.UserIntercept = void 0;
 const update_1 = require("./update");
 const connect_1 = require("./connect");
 const get_1 = require("./get");
-const blocked_1 = require("./blocked");
+const friends_1 = require("./friends");
 exports.UserIntercept = {
     register: connect_1.userRegister,
     login: connect_1.userLogin,
@@ -14,6 +14,11 @@ exports.UserIntercept = {
         username: get_1.get.Username,
         updated_at: get_1.get.UpdatedAt,
         created_at: get_1.get.CreatedAt,
+        avatar: get_1.get.Avatar,
+        friends: get_1.get.Friends,
+        friends_requests_received: get_1.get.FriendsRequestsReceived,
+        friends_requests_sent: get_1.get.FriendsRequestsSent,
+        last_connection: get_1.get.LastConnection,
     },
     update: {
         username: update_1.update.username,
@@ -24,8 +29,8 @@ exports.UserIntercept = {
         channels: update_1.update.channels,
         servers: update_1.update.servers
     },
-    blocked: {
-        add: blocked_1.blocked.add,
-        remove: blocked_1.blocked.remove
+    friends: {
+        add: friends_1.friends.add,
+        remove: friends_1.friends.remove
     }
 };

@@ -12,6 +12,7 @@ export interface IMessageModel extends IMessage, Document {}
 
 const MessageSchema = new Schema({
     message_id: { type: Number, required: true, unique: true, index: true },
+    username: { type: String, required: true, index: true },
     user_id: { type: Number, required: true, index: true },
     channel_id: { type: Number, required: true, index: true },
     message: { type: String, required: true },

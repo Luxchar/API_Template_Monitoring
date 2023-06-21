@@ -43,26 +43,6 @@ const send = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(Channel);
         if (!Channel)
             throw "Channel not found";
-        // Check if the user is in the channel
-        if (!Channel.members.includes(User.user_id))
-            throw "You are not in this channel";
-        // check if channel is a text channel
-        if (Channel.channel_type == utils_1.default.CONSTANTS.CHANNEL.TYPE.VOICE)
-            throw "Channel is not a text channel";
-        // if channel has a server id check if the user is in the server
-        if (Channel.server_id) {
-            var Server = yield database_1.default.servers.find.id(Channel.server_id);
-            if (!Server)
-                throw "Server not found";
-            if (!Server.members.includes(User.user_id))
-                throw "You are not in this server";
-            // Is the user in timeout
-            if (!Server.timeouts)
-                Server.timeouts = [];
-            if (Server.timeouts.includes(User.user_id))
-                throw "You are in timeout";
-        }
-        // Check if the user has permission to send messages
         //if (!UTILS.FUNCTIONS.CHECK.CHANNEL.PERMISSIONS(User, Channel, UTILS.CONSTANTS.CHANNEL.PERMISSIONS.MESSAGE.SEND)) throw "You do not have permission to send messages in this channel"
         var Message = yield database_1.default.messages.create({
             message_id: Date.now() + Math.floor(Math.random() * 1000),

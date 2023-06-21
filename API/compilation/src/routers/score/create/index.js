@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = void 0;
-const channels_create_1 = require("./channels.create");
+const score_create_1 = require("./score.create");
 exports.create = {
-    channel: channels_create_1.create_channel
+    create: score_create_1.createScore,
 };

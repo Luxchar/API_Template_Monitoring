@@ -5,4 +5,4 @@ var USERNAME;
 (function (USERNAME) {
     USERNAME[USERNAME["MAX_LENGTH"] = 30] = "MAX_LENGTH";
     USERNAME[USERNAME["MIN_LENGTH"] = 2] = "MIN_LENGTH";
-})(USERNAME = exports.USERNAME || (exports.USERNAME = {}));
+})(USERNAME || (exports.USERNAME = USERNAME = {}));

@@ -4,21 +4,16 @@ exports.FUNCTIONS = void 0;
 const find_1 = require("./find");
 class FUNCTIONS {
 }
+exports.FUNCTIONS = FUNCTIONS;
 FUNCTIONS.FIND = {
+    CHANNEL: {
+        id: find_1.findChannelID
+    },
     USER: {
         token: find_1.findUserbyToken,
-        id: find_1.findUserbyID
+        id: find_1.findUserbyID,
+        friend: find_1.findFriendbyUser
     }
-};
-FUNCTIONS.REMOVE_OVERFLOW_INFO_SERVER = (server) => {
-    server.owner = undefined;
-    server.members = undefined;
-    server.channels = undefined;
-    server.invites = undefined;
-    server.bans = undefined;
-    server.roles = undefined;
-    server.permissions = undefined;
-    return server;
 };
 FUNCTIONS.REMOVE_PRIVATE_INFO_USER = (user) => {
     user.password = undefined;
@@ -37,4 +32,3 @@ FUNCTIONS.REMOVE_OVERFLOW_INFO_CHANNEL = (channel) => {
     channel.permissions = undefined;
     return channel;
 };
-exports.FUNCTIONS = FUNCTIONS;

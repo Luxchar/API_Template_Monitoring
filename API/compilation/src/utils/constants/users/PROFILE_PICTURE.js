@@ -9,4 +9,4 @@ var PROFILE_PICTURE;
     PROFILE_PICTURE["ALLOWED_MIME_TYPES"] = "image/jpeg|image/png";
     PROFILE_PICTURE["PREMIUM_ALLOWED_EXTENSIONS"] = "jpg|jpeg|png|gif";
     PROFILE_PICTURE["PREMIUM_ALLOWED_MIME_TYPES"] = "image/jpeg|image/png|image/gif";
-})(PROFILE_PICTURE = exports.PROFILE_PICTURE || (exports.PROFILE_PICTURE = {}));
+})(PROFILE_PICTURE || (exports.PROFILE_PICTURE = PROFILE_PICTURE = {}));

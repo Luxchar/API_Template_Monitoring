@@ -14,7 +14,9 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const messages_1 = require("./messages/");
 const users_1 = require("./users");
+const channels_1 = require("./channels");
 __exportStar(require("./interface.database"), exports);
 exports.default = {
     users: {
@@ -27,9 +29,27 @@ exports.default = {
             username: users_1.UserFindByUsername,
             token: users_1.UserFindByToken,
             id: users_1.UserFindByID,
-            many: users_1.UserGetMany,
-            channels: UserGetAllChannels
+            many: users_1.UserGetMany
         },
         connect: users_1.UserConnect
+    },
+    messages: {
+        create: messages_1.MessageCreate,
+        find: {
+            id: messages_1.MessageFindOne,
+            user: messages_1.MessageFindUser,
+            channel: messages_1.MessageFindChannel
+        },
+        delete: messages_1.MessageDelete
+    },
+    channels: {
+        create: channels_1.ChannelCreate,
+        find: {
+            id: channels_1.ChannelFindOne,
+            messages: channels_1.GetXNumberofMessages,
+            userInChannel: channels_1.ChannelFindUser,
+            many: channels_1.ChannelGetMany
+        },
+        delete: channels_1.ChannelDelete
     }
 };

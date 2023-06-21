@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_client_1 = __importDefault(require("../client/logger.client"));
-const events_1 = require("./events");
 class ServerSocket {
     constructor(server) {
         try {
@@ -45,12 +44,11 @@ class ServerSocket {
             try {
                 ServerSocket.io.on("connection", (socket) => __awaiter(this, void 0, void 0, function* () {
                     logger_client_1.default.debug("New connection from " + socket.id);
-                    ServerSocket.EventHandler = new events_1.SocketEvents(socket);
-                    for (let event of ServerSocket.events) {
-                        if (typeof event !== "string")
-                            break;
-                        socket.on(event, ServerSocket.EventHandler[event].bind(ServerSocket.EventHandler));
-                    }
+                    //  ServerSocket.EventHandler = new SocketEvents(socket);
+                    // for(let event of ServerSocket.events){
+                    //     if(typeof event !== "string") break;
+                    //     socket.on(event, ServerSocket.EventHandler[event].bind(ServerSocket.EventHandler))
+                    // }
                 }));
             }
             catch (err) {

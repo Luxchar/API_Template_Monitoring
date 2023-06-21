@@ -16,3 +16,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./find.id.user"), exports);
 __exportStar(require("./find.token.user"), exports);
+__exportStar(require("./find.friend.user"), exports);

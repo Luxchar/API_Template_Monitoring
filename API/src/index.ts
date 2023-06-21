@@ -4,6 +4,7 @@ import { config }from "./config"
 import Database from "./database"
 import Controller from "./routers/controller/router.controller"
 import "./console"
+import Channel from "./database/models/Channel"
 
 export * from "./routers"
 export * from "./config"
@@ -17,3 +18,4 @@ setTimeout(() => {
     // HANDLE DATABASE HERE (MONGOOSE) -> NEED TO BE DONE BEFORE READY EVENT // TO FIX
     Client.emit("ready", new Controller(), Database)
 }, config.properties.readyEventTimeout)
+

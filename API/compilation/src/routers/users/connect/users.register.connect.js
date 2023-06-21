@@ -33,31 +33,13 @@ const userRegister = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         var User = yield database_1.default.users.create({
             username: username,
             password: yield bcrypt_1.default.hash(password, 10),
-            premium_expiration: new Date().toLocaleString(),
             token: ((0, uuid_1.v5)(username, (0, uuid_1.v4)()).split("-").join("") + Date.now()).toUpperCase(),
             user_id: user_id,
             created_at: new Date().toLocaleString(),
-            updated_at: new Date().toLocaleString(),
-            discriminator: utils_1.default.BASE[36](user_id),
+            updated_at: new Date().toLocaleString()
         });
         if (!User)
             throw "Failed to create user";
-        // create a channel where there only is the user
-        var Channel = yield database_1.default.channels.create({
-            channel_id: Date.now() + Math.floor(Math.random() * 1000),
-            channel_type: utils_1.default.CONSTANTS.CHANNEL.TYPE.HYBRID,
-            channel_category: "DM",
-            channel_name: "Me",
-            updated_at: new Date().toLocaleString(),
-            created_at: new Date().toLocaleString(),
-            // add the user to the channel members
-            members: [User.user_id],
-            members_count: 1,
-            permissions: utils_1.default.CONSTANTS.PERMISSIONS.SOLO(User)
-        });
-        if (!Channel)
-            throw "Channel not found";
-        User.channels = [Channel.channel_id];
         User.save();
         emitter_client_1.default.emit("register", User);
         res.json(new controller_1.RouteResponse()

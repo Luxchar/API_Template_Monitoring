@@ -6,4 +6,4 @@ var TYPE;
     TYPE["TEXT"] = "TEXT";
     TYPE["VOICE"] = "VOICE";
     TYPE["HYBRID"] = "HYBRID"; // text and voice channel (groupe, dm)
-})(TYPE = exports.TYPE || (exports.TYPE = {}));
+})(TYPE || (exports.TYPE = TYPE = {}));

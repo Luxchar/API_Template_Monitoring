@@ -33,11 +33,6 @@ const getChannelCreatedAt = (req, res) => __awaiter(void 0, void 0, void 0, func
         const UserInChannel = yield database_1.default.channels.find.userInChannel(User.id, Channel.id);
         if (!UserInChannel)
             throw "User not in channel";
-        if (Channel.server_id) { // Check if user is in server if channel is part of a server
-            const UserInServer = yield database_1.default.servers.find.userInServer(User.id, Channel.server_id);
-            if (!UserInServer)
-                throw "User not in server";
-        }
         res.json(new controller_1.RouteResponse()
             .setStatus(controller_1.Status.success)
             .setMessage("Channel found")

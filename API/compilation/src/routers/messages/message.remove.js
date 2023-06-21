@@ -29,22 +29,10 @@ const remove = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         var Channel = yield database_1.default.channels.find.id(parseInt(channel_id));
         if (!Channel)
             throw "Channel not found";
-        if (Channel.server_id)
-            throw "Channel is not a server channel";
-        // check if channel is a text channel
-        if (Channel.channel_type == utils_1.default.CONSTANTS.CHANNEL.TYPE.VOICE)
-            throw "Channel is not a text channel";
-        // Check if the user is in the channel
-        if (!Channel.members.includes(User.user_id))
-            throw "You are not in this channel";
         // Check if the message is not his own message
         var Message = yield database_1.default.messages.find.id(message_id);
         if (!Message)
             throw "Message not found";
-        if (Message.user_id != User.user_id) { // If the message is not his own message
-            if (!utils_1.default.FUNCTIONS.CHECK.CHANNEL.PERMISSIONS(User, Channel, utils_1.default.CONSTANTS.CHANNEL.PERMISSIONS.ADMIN))
-                throw "You do not have permission to delete others messages in this channel";
-        }
         // Delete the message
         var Message = yield database_1.default.messages.find.id(message_id);
         if (!Message)

@@ -25,18 +25,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const ChannelSchema = new mongoose_1.Schema({
-    server_id: { type: Number, required: false, index: true },
     channel_id: { type: Number, required: true, unique: true, index: true },
-    // if empty, it's a DM channel, if not empty and server_id is empty, it's a group channel, if not empty and server_id is not empty, it's a server channel
-    owner_id: { type: Number, required: false, index: true },
-    channel_name: { type: String, required: false },
-    channel_type: { type: String, required: true },
-    channel_category: { type: String, required: true },
-    members: { type: Array, required: true, default: [] },
-    members_count: { type: Number, required: true, default: 0 },
     updated_at: { type: String, required: true, default: new Date().toLocaleString() },
     created_at: { type: String, required: true, default: new Date().toLocaleString() },
-    // permissions which is an object of IChannelPermission
-    permissions: { type: Object, required: false, default: {} }
 });
 exports.default = mongoose_1.default.model("Channel", ChannelSchema);

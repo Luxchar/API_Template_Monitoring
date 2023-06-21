@@ -8,7 +8,7 @@ var Status;
     Status["warning"] = "warning";
     Status["info"] = "info";
     Status["failed"] = "failed";
-})(Status = exports.Status || (exports.Status = {}));
+})(Status || (exports.Status = Status = {}));
 class RouteResponse {
     setStatus(status) {
         this.status = status;

@@ -12,37 +12,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChannelUpdatedAt = void 0;
+exports.create_channel = void 0;
 const controller_1 = require("../../controller");
+const emitter_client_1 = __importDefault(require("../../../client/emitter.client"));
 const database_1 = __importDefault(require("../../../database"));
 const utils_1 = __importDefault(require("../../../utils"));
-const getChannelUpdatedAt = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const create_channel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { channel_id } = req.params;
+        const {} = req.params;
         const token = req.token;
-        if (!token || !channel_id || channel_id.length < utils_1.default.CONSTANTS.CHANNEL.ID.MIN_LENGTH || channel_id.length > utils_1.default.CONSTANTS.CHANNEL.ID.MAX_LENGTH ||
-            token.length < utils_1.default.CONSTANTS.USER.TOKEN.MIN_LENGTH || token.length > utils_1.default.CONSTANTS.USER.TOKEN.MAX_LENGTH || isNaN(parseInt(channel_id)))
+        if (!token || token.length < utils_1.default.CONSTANTS.USER.TOKEN.MIN_LENGTH || token.length > utils_1.default.CONSTANTS.USER.TOKEN.MAX_LENGTH)
             throw "Badly formatted";
-        const User = yield database_1.default.users.find.token(token);
-        if (!User)
-            throw "User not found";
-        const Channel = yield database_1.default.channels.find.id(parseInt(channel_id));
+        var User = yield utils_1.default.FUNCTIONS.FIND.USER.token(token);
+        if (User.channels.length >= utils_1.default.CONSTANTS.CHANNEL.MAX_PRIVATE_CHANNELS)
+            throw "You have reached the maximum number of private channels";
+        var Channel = yield database_1.default.channels.create({
+            channel_id: Date.now() + Math.floor(Math.random() * 1000),
+            updated_at: new Date().toLocaleString(),
+            created_at: new Date().toLocaleString(),
+        });
         if (!Channel)
-            throw "Channel not found";
-        // Check if user is in channel
-        const UserInChannel = yield database_1.default.channels.find.userInChannel(User.id, Channel.id);
-        if (!UserInChannel)
-            throw "User not in channel";
+            throw "Failed to create channel";
+        User.channels.push(Channel.channel_id); // save the channel id to the user
+        yield User.save(); // Save the user
+        emitter_client_1.default.emit("channel.create", Channel); // Emit the event to the client
+        emitter_client_1.default.emit("channel.join", Channel, User);
         res.json(new controller_1.RouteResponse()
             .setStatus(controller_1.Status.success)
-            .setMessage("Channel found")
-            .setData(Channel.updated_at));
+            .setMessage("Channel created")
+            .setData(Channel));
     }
     catch (err) {
         res.status(400);
         res.json(new controller_1.RouteResponse()
             .setStatus(controller_1.Status.error)
             .setMessage(err));
+        return;
     }
 });
-exports.getChannelUpdatedAt = getChannelUpdatedAt;
+exports.create_channel = create_channel;
