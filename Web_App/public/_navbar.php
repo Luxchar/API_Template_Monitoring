@@ -68,3 +68,44 @@
         window.location.href = "/";
     });
 </script>
+
+<script>
+    document.getElementById('search-input').addEventListener('click', function() {
+        const searchQuery = document.getElementById('search-input').value;
+        const bodyText = document.body.textContent || document.body.innerText;
+        const matches = bodyText.split(searchQuery);
+        document.body.innerHTML = '';
+        matches.forEach((segment, index) => {
+            document.body.innerHTML += segment;
+            if (index < matches.length - 1) {
+                const span = document.createElement('span');
+                span.style.backgroundColor = 'yellow';
+                span.textContent = searchQuery;
+
+                document.body.appendChild(span);
+            }
+        });
+    });
+</script>
+
+<script>
+    document.querySelector("input[name='search']").addEventListener("keyup", function() {
+        const searchQuery = this.value;
+        document.querySelectorAll('mark').forEach(mark => mark.outerHTML = mark.innerHTML);
+        if (searchQuery.trim().length > 0) {
+            const tagsToSearch = ['h1', 'h2', 'h3', 'h4', 'h5', 'p'];
+            tagsToSearch.forEach(tag => {
+                document.querySelectorAll(tag).forEach(element => {
+                    let innerHTML = element.innerHTML;
+                    const index = innerHTML.toLowerCase().indexOf(searchQuery.toLowerCase());
+                    if (index >= 0) { 
+                        innerHTML = innerHTML.substring(0,index) + "<mark>" + innerHTML.substring(index,index+searchQuery.length) + "</mark>" + innerHTML.substring(index + searchQuery.length);
+                        element.innerHTML = innerHTML;
+                    }
+                });
+            });
+        }
+    });
+</script>
+
+
